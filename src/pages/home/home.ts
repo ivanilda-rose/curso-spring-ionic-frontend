@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { CredenciaisDTO } from '../../models/credenciais.dto';
+import { AuthService } from '../../services/auth.service';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 	
 	creds: CredenciaisDTO = {
@@ -16,7 +18,11 @@ export class HomePage {
 		
 	}
 
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  constructor(
+		public navCtrl: NavController,
+		public menu: MenuController,
+		public auth: AuthService
+  ) {
 
   }
 
@@ -27,9 +33,14 @@ export class HomePage {
     this.menu.swipeEnable(true);
   }
 
-  login() {
-	  console.log(this.creds);
-    this.navCtrl.setRoot('CategoriasPage');
+  login() {	  
+	this.auth.autenticate(this.creds).subscribe(response =>
+		{
+			console.log(response.headers.get('Authorization'));
+			this.navCtrl.setRoot('CategoriasPage');
+		   
+		},
+		error => {});
   }
 
 }
