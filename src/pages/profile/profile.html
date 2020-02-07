@@ -2,7 +2,8 @@
   Generated template for the ProfilePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+  Ionic pages an
+  d navigation.
 -->
 <ion-header>
   <ion-navbar>
@@ -14,6 +15,10 @@
 </ion-header>
 
 <ion-content padding>
-	{{email}}
+	<ion-avatar>
+		<img class='circle' [src]="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'">	
+	</ion-avatar>
+	<h2 text-center>{{cliente?.nome}}</h2>
+	<p text-center>{{cliente?.email}}</p>
 
 </ion-content>
