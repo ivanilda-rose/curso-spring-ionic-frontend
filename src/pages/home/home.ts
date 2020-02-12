@@ -21,18 +21,27 @@ export class HomePage {
   constructor(
 		public navCtrl: NavController,
 		public menu: MenuController,
-		public auth: AuthService
-  ) {
+		public auth: AuthService) {
 
   }
 
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
   }
+  
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
-  }
-
+  }  
+  
+  ionViewDidEnter() {
+	this.auth.refreshToken().subscribe(
+		response => {
+			this.auth.sucessfullLogin(response.headers.get('Authorization'));
+			this.navCtrl.setRoot('CategoriasPage');
+		}
+	)
+  }  
+  
   login() {	  
 	this.auth.autenticate(this.creds).subscribe(response =>
 		{

@@ -45,7 +45,7 @@ export class ErrorInterceptor implements HttpInterceptor{
 	}
 	
 	handle401(){
-		let alter = this.alertCtrl.create({
+		let alert = this.alertCtrl.create({
 			title: 'Erro 401: Erro de autenticação',
 			message: "Email ou senha inválidos",
 			enableBackdropDismiss: false,
@@ -62,10 +62,10 @@ export class ErrorInterceptor implements HttpInterceptor{
 		this.storage.setLocalUser(null);		
 	}
 	
-	handleDefaultError(){
-		let alert = alertCtrl.create({
+	handleDefaultError(errorObj){
+		let alert = this.alertCtrl.create({
 			title: 'Erro: ' + errorObj.status + ':' + errorObj.error,
-			message: erroObj.message,
+			message: errorObj.message,
 			enableBackdropDismiss: false,
 			buttons: [
 				{
