@@ -21,10 +21,9 @@ export class AuthService{
 			`${API_CONFIG.baseUrl}/auth/refresh_token`,
 			{},
 			{
-				'observe': "response",
+				'observe': 'response',
 				'responseType': 'text'
-			}
-		);
+			});
 	}
 
 	autenticate(creds: CredenciaisDTO){
@@ -39,6 +38,7 @@ export class AuthService{
 	
 	sucessfullLogin(authorizationValue: string) {	
 		let tok = authorizationValue.substring(7);	
+		console.log(tok);
 		let usr : LocalUser = {
 			token: tok,
 			email: this.jwtHelper.decodeToken(tok).sub
