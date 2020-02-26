@@ -45,7 +45,10 @@ export class ProdutosPage {
 						item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
 					},
 					error => {});				
-		}
-		
+		}		
+	}
+	
+	showDetail(){
+		this.navCtrl.push("ProdutoDetailPage");
 	}
 }
