@@ -8,7 +8,6 @@ import { ProdutoDTO } from '../../models/produto.dto';
 @Injectable()
 export class ProdutoService{	
 	
-	
 	constructor(public http: HttpClient){		
 	}
 	
@@ -17,7 +16,7 @@ export class ProdutoService{
 	}
 	
 	findByCategoria(categoria_id : string){
-			return this.http.get(`${API_CONFIG.baseUrl}/produtos?categorias=${categoria_id}`);		
+		return this.http.get(`${API_CONFIG.baseUrl}/produtos?categorias=${categoria_id}`);		
 	}
 	
 	getSmallImageFromBucket(id : string) : Observable<any>{
