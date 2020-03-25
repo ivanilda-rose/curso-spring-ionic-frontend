@@ -13,22 +13,23 @@
 			Itens de Pedido
 		</ion-card-title>	
 	
-		<ion-list *ngFor="let item of cartItems">
-			<ion-thumbnail item-start>
-				<img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'">
-			</ion-thumbnail>
-			<ion-item>
+		<ion-list>
+			<ion-item *ngFor="let item of cartItems">
+				<ion-thumbnail item-start>
+					<img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'">
+				</ion-thumbnail>
+			
 				<h2>{{item.produto.nome}}</h2>
 				<p>{{item.produto.preco | currency}}</p>
 				<p class="nolinebreak">{{item.quantidade}}</p>
 				<p item-end>{{item.produto.preco * item.quantidade | currency}}</p>
 			</ion-item>
-		</ion-list>
-		
-		<ion-item>
-			<h2>Total</h2>
-			<h2 item-end>{{total() | currency}}</h2>
-		</ion-item>
+			
+			<ion-item>
+				<h2>Total</h2>
+				<h2 item-end>{{total() | currency}}</h2>
+			</ion-item>
+		</ion-list>		
 	</ion-card>
 	
 	<ion-card>
@@ -67,4 +68,7 @@
 			<h2>Pagamento com boleto</h2>
 		</ion-item>
 	</ion-card>
+	
+	<button ion-button block (click)="checkout()">Confirmar pedido</button>
+	<button ion-button block outline (click)="back()">Voltar</button>
 </ion-content>

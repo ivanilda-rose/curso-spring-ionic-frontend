@@ -32,8 +32,7 @@ export class ClienteService {
 		{
 				observe: 'response',
 				responseType: 'text'
-		});
-		
+		});		
 	}
 	
 }
