@@ -22,13 +22,11 @@ import { PedidoService} from '../../services/domain/pedido.service';
 })
 export class OrderConfirmationPage {
 	
-	pedido: PedidoDTO;
-	
-	cartItems: CartItem[];
-	
-	cliente: ClienteDTO;
-	
+	pedido: PedidoDTO;	
+	cartItems: CartItem[];	
+	cliente: ClienteDTO;	
 	endereco: EnderecoDTO;
+	codPedido: String;
 
 	constructor(
 		public navCtrl: NavController,
@@ -55,7 +53,7 @@ export class OrderConfirmationPage {
 		
 	}
 	
-	private findEndereco(id: string, list: EnderecoDTO[]) : EnderecoDTO{
+	private findEndereco(id: string, list: EnderecoDTO[]) : EnderecoDTO {
 		let position = list.findIndex(x => x.id == id);
 		return list[position];
 	}
@@ -68,11 +66,15 @@ export class OrderConfirmationPage {
 		this.navCtrl.setRoot('CartPage');
 	}
 	
+	home(){
+		this.navCtrl.setRoot('CategoriasPage');
+	}
+	
 	checkout(){
 		this.pedidoService.insert(this.pedido).subscribe(
 			response => {
 				this.cartService.createOrClearCart();
-				console.log(response.headers.get('location'));				
+				this.codPedido = this.extractId(response.headers.get('location'));				
 			},
 			error => {
 				if (error.status == 403) {
@@ -81,5 +83,9 @@ export class OrderConfirmationPage {
 			}
 		);
 	}
-
+	
+	private extractId(location : String) : String {
+		let position = location.lastIndexOf("/");
+		return location.substring(position + 1, location.length);
+	}
 }
