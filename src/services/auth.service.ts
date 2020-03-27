@@ -41,8 +41,7 @@ export class AuthService{
 	}
 	
 	sucessfullLogin(authorizationValue: string) {	
-		let tok = authorizationValue.substring(7);	
-		console.log("Tok: "+ tok);
+		let tok = authorizationValue.substring(7);			
 		let usr : LocalUser = {
 			token: tok,
 			email: this.jwtHelper.decodeToken(tok).sub

@@ -6,7 +6,7 @@ import { API_CONFIG } from '../../config/api.config';
 @Injectable()
 export class PedidoService {
 	
-	constructor(public http: HttpClient){		
+	constructor(public http: HttpClient) {		
 	}
 	
 	insert(obj: PedidoDTO){
