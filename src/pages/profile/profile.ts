@@ -20,24 +20,25 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class ProfilePage {
 	
-  cliente : ClienteDTO
+  cliente : ClienteDTO;
   picture : string;
   cameraOn : boolean = false;
 
-  constructor(
+  constructor (
 	  public navCtrl: NavController, 
 	  public navParams: NavParams,
 	  public storage: StorageService,
 	  public clienteService: ClienteService,
-	  private camera: Camera
+	  public camera: Camera
   ) {
+	 
   }
 
   ionViewDidLoad() {
 	this.loadData();
   }
   
-  loadData(){
+  loadData() {
 	let localUser =  this.storage.getLocalUser();
 	if (localUser && localUser.email) {
 		this.clienteService.findByEmail(localUser.email).subscribe(
@@ -56,17 +57,17 @@ export class ProfilePage {
 	}
   }
   
-  getImageIfExists(){	  
+  getImageIfExists() {	  
 	 return this.clienteService.getImageFromBucket(this.cliente.id).subscribe(
 		response => {
-			this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
-			
+			this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;			
 		},
-		error =>{}
+		error =>{			
+		}
 	 );	  
   }
-  
-  getCameraPicture(){	  
+    
+  getCameraPicture() {	  
     this.cameraOn = true;
 	  
 	const options: CameraOptions = {
@@ -83,11 +84,12 @@ export class ProfilePage {
 	 
 		 this.picture = 'data:image/jpeg;base64,' + imageData;
 		 this.cameraOn = false;
-		}, (err) => {		 
+		}, (err) => {	
+			this.cameraOn = false;	 
 	});			  
   }
   
-  openGallery(){	  
+  openGallery() {	  
     this.cameraOn = true;
 	  
 	const options: CameraOptions = {
@@ -102,7 +104,8 @@ export class ProfilePage {
 	 
 		 this.picture = 'data:image/jpeg;base64,' + imageData;
 		 this.cameraOn = false;
-		 }, (err) => {		 
+		 }, (err) => {
+			 this.cameraOn = false; 
 	});			  
    }
   
