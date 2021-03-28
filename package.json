@@ -45,7 +45,8 @@
     "zone.js": "0.8.29"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.2.4"
+    "@ionic/app-scripts": "3.2.4",
+    "@ionic/cli": "^6.13.1"
   },
   "description": "An Ionic project",
   "cordova": {
